@@ -1,5 +1,5 @@
 # Introduction to RNA-seq data analysis 
-### 1st - 3rd July 2020
+### 18th - 20th November 2020
 #### Taught remotely
 #### Bioinformatics Training, Craik-Marshall Building, Downing Site, University of Cambridge
 
@@ -12,8 +12,7 @@
 * Chandra Chilamakuri - Bioinformatics Core, Cancer Research UK Cambridge Institute
 * Dominique-Laurent Couturier - Bioinformatics Core, Cancer Research UK Cambridge Institute 
 * Jon Price - Miska Group, Gurdon Institute, Cambridge
-* Manik Garg - Brazma Group, EBI
-* Sankari Nagarajan - School of Biological Sciences, University of Manchester
+* Karsten Bach - Marioni Group, Cancer Research UK Cambridge Institute
 * Stephane Ballereau - Bioinformatics Core, Cancer Research UK Cambridge Institute
 * Zeynep Kalender Atak - Miller Group, Cancer Research UK Cambridge Institute
 
@@ -29,11 +28,11 @@ data, such as boxplots and heatmaps.
 This workshop is aimed at biologists interested in learning how to perform
 differential expression analysis of RNA-seq data. 
 
-Whilst we have run this course for several years, this is the second time that
-we will be teaching it remotely. Please bear with us if there are any
-technical hitches, and be aware that timings for different sections laid out
-in the schedule below may not be adhered to. There may be some necessity to
-make adjusments to the course as we go.
+Whilst we have run this course for several years, we are still learning how to
+teach it remotely.  Please bear with us if there are any technical hitches, and
+be aware that timings for different sections laid out in the schedule below may
+not be adhered to. There may be some necessity to make adjusments to the course
+as we go.
 
 > ## Prerequisites
 >
@@ -46,9 +45,9 @@ make adjusments to the course as we go.
 > attempting these materials.
 > We recommend our [Introduction to R course](https://bioinformatics-core-shared-training.github.io/r-intro/)
 
-## Google Document
+## Shared Google Document
 
-This [Google Document](https://docs.google.com/document/d/1cTE-UNsmOzm_DD1gcnVwMS0HaFx15okN5FFxP4gPL_4/edit?usp=sharing) contains useful information and links.
+This [Google Document]() contains useful information and links.
 
 Please use it to post any questions you have during the course.
 
@@ -85,82 +84,76 @@ regarded as aspirations**
 
 ### Day 1
 
-9:30 - 9:45 - Welcome! <!-- Abbi Edwards -->
+9:30 - 9:45 - Welcome! <!-- Ash -->
 
 9:45 - 10:15 - [Introduction to RNAseq
-Methods](html/A_Introduction_to_RNAseq_Methods.html) - Sankari Nagarajan
+Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price  
 
-10:15 - 11:15 Raw read file format and QC - Abbi Edwards  
-    - [Introductory slides](html/B_FastQC.html)  
+10:15 - 11:15 [Raw read file format and QC](html/B_FastQC.html)   - Jon Price  
     - [Practical](html/B_FastQC_practical.html)  
-    - [Practical solutions](html/B_FastQC_practical.Solutions.html)
+<!--    - [Practical solutions](html/B_FastQC_practical.Solutions.html) -->
 
-11:15 - 12:45 Short read alignment with HISAT2 - Zeynep Kalender Atak  
-    - [Introductory slides](html/C_Alignment_with_HISAT2.html)  
+11:15 - 12:45 [Short read alignment with HISAT2](html/C_Alignment_with_HISAT2.html)   - Zeynep Kalender Atak  
     - [Practical](html/C_Alignment_with_HISAT2_practical.html)  
-    - [Practical solutions](html/C_Alignment_with_HISAT2.Solutions.html)
+<!--    - [Practical solutions](html/C_Alignment_with_HISAT2.Solutions.html) -->
 
 12:45 - 13:45 Lunch
 
-13:45 - 15:30 QC of alignment - Zeynep Kalender Atak  
-    - [Introductory slides](html/D_QC_of_aligned_reads.html)  
+13:45 - 15:30 [QC of alignment](html/D_QC_of_aligned_reads.html) - Zeynep Kalender Atak  
     - [Practical](html/D_QC_of_aligned_reads_practical.html)  
-    - [Practical solutions](html/D_QC_of_aligned_reads.Solutions.html)
+<!--    - [Practical solutions](html/D_QC_of_aligned_reads.Solutions.html) -->
 
-15:30 - 17:00 Quantification with SubRead - Chandra Chilamakuri  
-    - [Introductory slides](html/E_Read_Counts_with_Subread.html)  
+15:30 - 17:00 [Read Counting with SubRead](html/E_Read_Counts_with_Subread.html)   - Ashley Sawle  
     - [Practical](html/E_Read_Counts_with_Subread.practical.html)  
-    - [Practical solutions](html/E_Read_Counts_with_Subread.Solutions.html)
+<!--    - [Practical solutions](html/E_Read_Counts_with_Subread.Solutions.html) -->
 
-<!-- Goodbye: Abbi -->
+<!-- Goodbye: Ash -->
 
 ### Day 2
 
-<!-- Welcome: Abbi -->
+<!-- Welcome: Ash -->
 
-9:30 - 10:15  [Introduction to RNAseq Analysis in R](html/01_Introduction_to_RNAseq_Analysis_in_R.html) - Sankari Nagarajan 
+9:30 - 10:15  [Introduction to RNAseq Analysis in R](html/01_Introduction_to_RNAseq_Analysis_in_R.html) - Jon Price   
 
 10:15 - 12:30 - [RNA-seq Pre-processing](html/02_Preprocessing_Data.html) - 
-Chandra Chilamakuri  
-    - [Practical solutions](html/02_Preprocessing_Data.Solutions.html)   
+Stephane Ballereau
+<!--    - [Practical solutions](html/02_Preprocessing_Data.Solutions.html)   -->
 
 12:30 - 13:30 Lunch
 
-13:30 - 15:30 Statistical Analysis of Bulk RNAseq Data - Dominique-Laurent  
+13:30 - 15:30 [Statistical Analysis of Bulk RNAseq Data](html/StatsRNAseq_Couturier_02-07-2020.pdf)    - Dominique-Laurent  
 Couturier     
-    - [Slides](html/StatsRNAseq_Couturier_02-07-2020.pdf)   
     - [Practical (html)](html/StatsRNAseq_Couturier_20-05-2020.html) [(rmd)](html/StatsRNAseq_Couturier_20-05-2020.Rmd)  
 
-15:30 - 17:00 Experimental Design of Bulk RNAseq studies - Sankari Nagarajan  
-    - [Slides](html/ExperimentalDesignCourse_Nagarajan_20-05-2020.pdf)  
+15:30 - 17:00 [Experimental Design of Bulk RNAseq studies](html/ExperimentalDesignCourse_Nagarajan_20-05-2020.pdf)   - Abbi Edwards   
     - [Practical](html/RNAseq_ExperimentalDesignPractical.pdf)    
 
 <!-- Goodbye: Abbi -->
 
 ### Day 3
 
-<!-- Welcome: Stephane/Ashley?  -->
+<!-- Welcome: Abbi  -->
 
 9:30 - 12:15 - [Differential Expression for
-RNA-seq](html/04_DE_analysis_with_DESeq2.html) - Ashley Sawle   
-    - [practical solutions](html/04_DE_analysis.Solutions.html)   
+RNA-seq](html/04_DE_analysis_with_DESeq2.html) - Abbi Edwards 
+<!--    - [practical solutions](html/04_DE_analysis.Solutions.html)   -->
 
 12:15 - 13:15 Lunch
 
 13:15 - 15:30 [Annotation and Visualisation of RNA-seq
-results](html/05_Annotation_and_Visualisation.html) - Abbi Edwards  
-    - [practical solutions](html/05_Annotation_and_Visualisation.Solutions.html)  
+results](html/05_Annotation_and_Visualisation.html) - Chandra Chilamakuri  
+<!--    - [practical solutions](html/05_Annotation_and_Visualisation.Solutions.html)  -->
 
-15:30 - 17:00 [Gene-set testing](html/06_Gene_set_testing.html) - Stephane Ballereau   
-    - [practical solutions](html/06_Gene_set_testing.Solutions.html)  
+15:30 - 17:00 [Gene-set testing](html/06_Gene_set_testing.html) - Ashley Sawle
+<!--     - [practical solutions](html/06_Gene_set_testing.Solutions.html)  -->
 
-<!-- Goodbye: Stephane -->
+<!-- Goodbye: Ash -->
 
 ## Source Materials for Practicals
 
 The lecture slides and other source materials, including R code and 
 practical solutions, can be found in the course's [Github 
-repository](https://github.com/bioinformatics-core-shared-training/RNAseq_July_2020_remote)
+repository](https://github.com/bioinformatics-core-shared-training/RNAseq_November_2020_remote)
 
 ## Extended materials
 
