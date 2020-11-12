@@ -87,11 +87,10 @@ format in the next step.
 
 To download the sra file we need their accessions numbers. Go to the 
 [SRA Run Selector](https://trace.ncbi.nlm.nih.gov/Traces/study/?go=home) and
-enter the project number *SRP045534*. This will give us the 8 `SRR` run numbers
+enter the project number *SRP045534*. This will give us the `SRR` run numbers
 that we need to download.
 
-Use the `prefetch` tool from the sra toolkit to download each file. This will
-take 
+Use the `prefetch` tool from the sra toolkit to download each file.
 
 ```{bash}
 prefetch SRR1552444
@@ -111,9 +110,7 @@ prefetch SRR1552455
 ## Extracting fastq files
 
 Using the [SRA Toolkit](https://www.ncbi.nlm.nih.gov/sra) command-line utility
-from NCBI we can generate the `fastq` files from these archive files. We can do
-this within a Terminal (i.e. not within RStudio) with the following, making
-sure your working directory contains the `.sra` files.
+from NCBI we can generate the `fastq` files from these archive files.
 
 ```{bash}
 mkdir fastq
