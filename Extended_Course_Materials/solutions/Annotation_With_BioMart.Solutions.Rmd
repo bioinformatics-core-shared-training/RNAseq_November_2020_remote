@@ -1,0 +1,89 @@
+---
+title: "RNA-seq Analysis in R"
+subtitle: "Annotation and Visualisation of RNA-seq results - Solutions"
+author: "Stephane Ballereau, Dominique-Laurent Couturier, Mark Dunning, Abbi Edwards, Ashley Sawle"
+date: '`r format(Sys.time(), "Last modified: %d %b %Y")`'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+minutes: 300
+layout: page
+---
+
+```{r setup, include=FALSE}
+library(biomaRt)
+library(GenomicFeatures)
+library(DESeq2)
+library(tidyverse)
+```
+
+```{r prepareData, message=FALSE, warning=FALSE}
+# load data
+load("../../Course_Materials/Robjects/DE.RData")
+## set up connection to ensembl database
+ensembl <- useMart("ENSEMBL_MART_ENSEMBL")
+# specify a data set to use
+ensembl <- useDataset("mmusculus_gene_ensembl", mart=ensembl)
+```
+
+### Challenge 1
+
+That was just 1000 genes. We need annotations for the entire results table.
+Also, there may be some other interesting columns in BioMart that we wish to
+retrieve.  
+
+> (a) Search the attributes and add the following to our list of attributes:  
+>       (i) The gene description   
+>       (ii) The gene biotype  
+> (b) Query BioMart using all of the genes in our results table (`resLvV`)  
+> (c) How many Ensembl genes have multipe Entrez IDs associated with them?  
+
+```{r solutionChallenge1, message=FALSE, warnings=FALSE}
+# Set the filter type and values
+ourFilterType <- "ensembl_gene_id"
+
+# set the values for the filter
+filterValues <- rownames(resLvV)[1:1000]
+
+# check the available "attributes" - things you can retreive
+listAttributes(ensembl) %>%
+    filter(str_detect(name, "description"))
+
+listAttributes(ensembl) %>%
+    filter(str_detect(name, "biotype"))
+```
+
+```{r solutionChallenge1acode, eval=FALSE, message=FALSE, warnings=FALSE}
+# set attributes
+attributeNames <- c('ensembl_gene_id',
+                    'entrezgene_id',
+                    'external_gene_name',
+                    'description',
+                    'gene_biotype')
+
+# run the query
+annot <- getBM(attributes=attributeNames,
+               filters = ourFilterType,
+               values = filterValues,
+               mart = ensembl)
+
+# count duplicate ids
+annot %>%
+  add_count(ensembl_gene_id) %>% 
+  filter(n>1) %>% 
+  distinct(ensembl_gene_id) %>% 
+  nrow()
+```
+
+```{r solutionChallenge1a, echo=FALSE, message=FALSE, warnings=FALSE}
+# annotations
+load("../../Course_Materials/Robjects/Full_annotation.RData")
+
+# duplicate ids
+annot %>%
+  add_count(ensembl_gene_id) %>% 
+  filter(n>1) %>% 
+  distinct(ensembl_gene_id) %>% 
+  nrow()
+```
