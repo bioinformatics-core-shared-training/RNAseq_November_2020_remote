@@ -1,5 +1,5 @@
 # Introduction to RNA-seq data analysis - Extended Materials
-### 19th - 21st May 2020
+### 18th - 20th November 2020
 #### Taught remotely
 #### Bioinformatics Training, Craik-Marshall Building, Downing Site, University of Cambridge
 
@@ -8,38 +8,31 @@
 These files contain some additional information and exercises not included 
 during the taught course.
 
-### Day 1
+1. Obtaining public data
+    - [Downloading files from SRA and aligning](Supplementary_Materials/S1_Getting_raw_reads_from_SRA.html)
 
-1. Raw read file format and QC  
-    - [Example of using Trimmomatic to remove adapters](extended_html/Trimming.html)
+2. Raw read file format and QC
+    - [Using Trimmomatic to remove adapter contamination from reads](extended_html/Trimming.html)
 
-4. Quantification with SubRead   
-    - [Practical](extended_html/E_Read_Counts_with_Subread.practical.html)  
-    - [Practical solutions](extended_html/E_Read_Counts_with_Subread.Solutions.html)  
+3. Pre-processing - extended 
+    - [A brief intro to the tidyverse](extended_html/02a_A_brief_intro_to_dplyr.html)  
+    - A more extended tidyverse course can be found here: 
+        [Introduction to R](https://bioinformatics-core-shared-training.github.io/r-intro/)
 
-### Day 2
+4. Annotation and Visualisation - extended 
+    - [Annotation with biomaRt](extended_html/Annotation_With_BioMart.html)  
+        - [practical solutions](extended_html/Annotation_With_BioMart.Solutions.html)
+    - [Additional annotation and plotting](Supplementary_Materials/S3_Annotation_and_Visualisation.html)
 
-1. [RNA-seq Pre-processing](extended_html/02_Preprocessing_Data.html)
-
-    - [Practical solutions](extended_html/02_Preprocessing_Data.Solutions.html)  
-
-### Day 3
-
-
-2. [Annotation and Visualisation of RNA-seq results](extended_html/05_Annotation_and_Visualisation.html)
-
-    - [practical 
-solutions](extended_html/05_Annotation_and_Visualisation.Solutions.html)
-
-3. [Gene-set testing](extended_html/06_Gene_set_testing.html)
-
+5. Gene set testing - extended
+    - [Gene-set testing](extended_html/06_Gene_set_testing.html)
     - [practical solutions](extended_html/06_Gene_set_testing.Solutions.html)
 
 ## Source Materials for Practicals
 
 The all of the lecture slides and other source materials, including R code and 
 practical solutions, can be found in the course's [Github 
-repository](https://github.com/bioinformatics-core-shared-training/RNAseq_September_2019)
+repository](https://github.com/bioinformatics-core-shared-training/RNAseq_November_2020_remote)
 
 ### Supplementary lessons
 
@@ -49,13 +42,10 @@ Introductory R materials:
 
 Additional RNAseq materials:
 
-- [Downloading files from SRA and aligning](Supplementary_Materials/S1_Getting_raw_reads_from_SRA.html)
-- [Additional annotation and plotting](Supplementary_Materials/S3_Annotation_and_Visualisation.nb.html)
-
 Data: Example Mouse mammary data (fastq files): 
-	[https://figshare.com/s/f5d63d8c265a05618137](https://figshare.com/s/f5d63d8c265a05618137)
+	[https://figshare.com/s/f5d63d8c265a05618137](https://figshare.com/s/f5d63d8c265a05618137)]
 
-### Additional resources
+### Additional resources - Places to get help
 
 [Bioconductor help](https://www.bioconductor.org/help/)  
 [Biostars](https://www.biostars.org/)  
