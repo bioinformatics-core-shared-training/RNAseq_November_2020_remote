@@ -378,6 +378,59 @@ legend("topright", legend = leg, pt.bg = cols, pch=21, bty="n")
 
 ## Differential Expression - worrying dispersion plot examples
 
+<!--
+A note about these dispersion plots:
+
+I wrote the Harvard team and got the response below. This is basically what Dom
+surmised. For the second plot, Dom thinks it is conceivable that there could be
+nothing wrong with the data as such and that this pattern could arise if you
+had a particularly unusual treatment, perhaps resulting in extreme
+downregulation of a large cohort of genes and extreme upregulation of another
+large cohort of genes. Either way, in both cases the thing to do is not to
+worry about trying to interpret the problem from the dispersion plot, but to go
+back to the raw data and figure out what is unusual.
+
+From: Piper, Mary <piper@hsph.harvard.edu>
+Sent: 01 July 2020 01:19
+To: Ashley Sawle <Ashley.Sawle@cruk.cam.ac.uk>
+Cc: HSPH-HBCTraining <HBCtraining@hsph.harvard.edu>
+Subject: Re: A question about your RNAseq course from a fellow trainer
+ 
+Hi Ash,
+
+Glad that our materials are useful to you - we have converted the DGE materials
+to an online course format too, which is available at:
+https://hbctraining.github.io/DGE_workshop_salmon_online/schedule/. I added
+these dispersion plots a while ago, and I believe that the first plot was from
+data that was highly contaminated with rRNA. I think the rRNA was
+computationally removed prior to the analysis from a low input RNA-seq library
+back 3-4 years ago, but there were still large differences in the complexity of
+the samples (the data was a real mess). The second plot was from a student who
+had taken our course; I know the data was really weird in that it had very few
+genes with higher mean counts (it also had weird MA plot and poor clustering by
+PCA). However, since I had not analyzed the data, I only offered suggestions
+for looking into the dataset - I don't know if they were able to rescue their
+dataset (b/c I believe they also did not have any/many DE genes). So, the bad
+dispersion plot is likely due to the strange nature of their data with few
+genes with higher mean counts (so the dispersion could not be estimated as
+accurately across genes with higher mean counts) and/or affected by the outlier
+sample/s.
+
+Note that in the online materials, I have an additional bad dispersion plot in
+an exercise. This plot was from a pseudobulk scRNA-seq analysis - the data
+reflect a single cell type that had huge variations in the number of cells
+collapsed together per sample to generate the sample-level counts. Some samples
+had only  a handful of cells, while other samples had thousands. Therefore, you
+can imagine the variation being quite large between samples of the same sample
+group.
+
+Hope this helps, and please let me know if you have additional questions.
+
+Best wishes,
+Mary
+
+-->
+
 <div><br></div>
 
 <img src="images/bad_dispersion.png" class="centerimg" style="width: 100%">
