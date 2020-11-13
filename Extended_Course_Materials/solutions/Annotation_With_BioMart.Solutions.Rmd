@@ -22,7 +22,7 @@ library(tidyverse)
 # load data
 load("../../Course_Materials/Robjects/DE.RData")
 ## set up connection to ensembl database
-ensembl <- useMart("ENSEMBL_MART_ENSEMBL")
+ensembl <- useEnsembl("genes")
 # specify a data set to use
 ensembl <- useDataset("mmusculus_gene_ensembl", mart=ensembl)
 ```
@@ -35,17 +35,9 @@ retrieve.
 
 > (a) Search the attributes and add the following to our list of attributes:  
 >       (i) The gene description   
->       (ii) The gene biotype  
-> (b) Query BioMart using all of the genes in our results table (`resLvV`)  
-> (c) How many Ensembl genes have multipe Entrez IDs associated with them?  
+>       (ii) The gene biotype    
 
 ```{r solutionChallenge1, message=FALSE, warnings=FALSE}
-# Set the filter type and values
-ourFilterType <- "ensembl_gene_id"
-
-# set the values for the filter
-filterValues <- rownames(resLvV)[1:1000]
-
 # check the available "attributes" - things you can retreive
 listAttributes(ensembl) %>%
     filter(str_detect(name, "description"))
@@ -54,7 +46,10 @@ listAttributes(ensembl) %>%
     filter(str_detect(name, "biotype"))
 ```
 
-```{r solutionChallenge1acode, eval=FALSE, message=FALSE, warnings=FALSE}
+
+> (b) Query BioMart using all of the genes in our results table (`resLvV`)
+
+```{r solutionChallenge1bcode, message=FALSE, warnings=FALSE}
 # set attributes
 attributeNames <- c('ensembl_gene_id',
                     'entrezgene_id',
@@ -62,24 +57,22 @@ attributeNames <- c('ensembl_gene_id',
                     'description',
                     'gene_biotype')
 
+# Set the filter type and values
+ourFilterType <- "ensembl_gene_id"
+
+# set the values for the filter
+filterValues <- rownames(resLvV)
+
 # run the query
 annot <- getBM(attributes=attributeNames,
                filters = ourFilterType,
                values = filterValues,
                mart = ensembl)
-
-# count duplicate ids
-annot %>%
-  add_count(ensembl_gene_id) %>% 
-  filter(n>1) %>% 
-  distinct(ensembl_gene_id) %>% 
-  nrow()
+head(annot)
 ```
+> (c) How many Ensembl genes have multipe Entrez IDs associated with them?  
 
-```{r solutionChallenge1a, echo=FALSE, message=FALSE, warnings=FALSE}
-# annotations
-load("../../Course_Materials/Robjects/Full_annotation.RData")
-
+```{r solutionChallenge1c, message=FALSE, warnings=FALSE}
 # duplicate ids
 annot %>%
   add_count(ensembl_gene_id) %>% 
@@ -87,3 +80,12 @@ annot %>%
   distinct(ensembl_gene_id) %>% 
   nrow()
 ```
+
+> (d) How many Ensembl genes in `resLvV` don't have any annotation?
+
+```{r solutionChallenge1d, message=FALSE, warnings=FALSE}
+length(filterValues) - length(unique(annot$ensembl_gene_id))
+```
+
+**Note**: The answers to (c) and (d) may change depending on the current release
+version of BioMart. This html was generated with release 101.
