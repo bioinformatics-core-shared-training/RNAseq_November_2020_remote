@@ -10,13 +10,13 @@ output:
     widescreen: yes
   beamer_presentation: default
   slidy_presentation: default
+bibliography: ref.bib
 ---
 
 ## Counting
 
 * Use **`featureCounts`** [@Liao2014] programme from the [subRead
 package](http://subread.sourceforge.net/)
-
 
  * Need to provide **`featureCounts`** with an annotation file. 
 
@@ -27,31 +27,52 @@ package](http://subread.sourceforge.net/)
 GTF/GFF files define genomic regions covered by different types of genomic
 features, e.g. genes, transcripts, exons, or UTRs. 
 
-<img src="images/gtf.png" class="centerimg" style="width: 100%;">
+<img src="images/gtf_header.png" class="centerimg" style="width: 100%;">
 
 ## GTF File Format
 
-<img src="images/gtf_chr.png" class="centerimg" style="width: 100%;">
+<img src="images/gtf_esr1.png" class="centerimg" style="width: 100%;">
 
 ## GTF File Format
 
-<img src="images/gtf_source.png" class="centerimg" style="width: 100%;">
+<img src="images/gtf_esr1_chr.png" class="centerimg" style="width: 100%;">
 
 ## GTF File Format
 
-<img src="images/gtf_feature.png" class="centerimg" style="width: 100%;">
+<img src="images/gtf_esr1_source.png" class="centerimg" style="width: 100%;">
 
 ## GTF File Format
 
-<img src="images/gtf_coords.png" class="centerimg" style="width: 100%;">
+<img src="images/gtf_esr1_feature.png" class="centerimg" style="width: 100%;">
 
 ## GTF File Format
 
-<img src="images/gtf_strand.png" class="centerimg" style="width: 100%;">
+<img src="images/gtf_esr1_coords.png" class="centerimg" style="width: 100%;">
 
 ## GTF File Format
 
-<img src="images/gtf_extra.png" class="centerimg" style="width: 100%;">
+<img src="images/gtf_esr1_strand.png" class="centerimg" style="width: 100%;">
+
+## GTF File Format
+
+<img src="images/gtf_esr1_codon.png" class="centerimg" style="width: 100%;">
+
+## GTF File Format
+
+<img src="images/gtf_esr1_attributes.png" class="centerimg" style="width: 100%;">
+
+## GTF File Format {#less_space_after_title}
+
+
+<img src="images/gtf_esr1_gene.png" class="centerimg" style="width: 100%;">
+
+## GTF File Format {#less_space_after_title}
+
+<img src="images/gtf_esr1_transcript.png" class="centerimg" style="width: 100%;">
+
+## GTF File Format {#less_space_after_title}
+
+<img src="images/gtf_esr1_exon.png" class="centerimg" style="width: 100%;">
 
 ## Using FeatureCounts
 
