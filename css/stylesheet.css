@@ -67,3 +67,17 @@ img.top {
     margin-bottom: 90px;
     margin-top: 20px;
 }
+
+
+.wkfthree2{
+    float: none;
+    border-style: solid; 
+    border-width: 1px;
+    border-radius: 28px; 
+    padding: 20px;
+    display: block;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
