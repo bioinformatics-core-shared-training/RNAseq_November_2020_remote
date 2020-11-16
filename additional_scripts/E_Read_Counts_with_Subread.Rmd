@@ -74,19 +74,45 @@ features, e.g. genes, transcripts, exons, or UTRs.
 
 <img src="images/gtf_esr1_exon.png" class="centerimg" style="width: 100%;">
 
+
 ## Using FeatureCounts
 
 When using a GTF/GFF file we need to tell **`featureCounts`** 
 
 * what feature type to use to count reads
-* what attribute type to summarise the results with
+
+
+<img src="images/Gene_exon.svg" class="centerimg" style="width: 90%; margin-top: 122px;">
+
+## Using FeatureCounts
+
+When using a GTF/GFF file we need to tell **`featureCounts`** 
+
+* what feature type to use to count reads
+* what attribute type to summarise the results
 
 For RNAseq we most commonly wish to count reads aligning to exons, and then to
 summarise at the gene level. 
 
-<img src="images/genes_and_exons.png" class="centerimg" style="width: 60%; margin-top: 60px;">
+<img src="images/Gene_exon.svg" class="centerimg" style="width: 90%; margin-top: 20px;">
 
-<img src="images/features_and_attributes.png" class="centerimg" style="width: 60%; margin-top: 60px;">
+<img src="images/Feature_attribute.svg" class="centerimg" style="width: 90%; margin-top: 20px;">
+
+## Using FeatureCounts
+
+When using a GTF/GFF file we need to tell **`featureCounts`** 
+
+* what feature type to use to count reads
+* what attribute type to summarise the results
+
+For RNAseq we most commonly wish to count reads aligning to exons, and then to
+summarise at the gene level. 
+
+<img src="images/Gene_exon.svg" class="centerimg" style="width: 90%; margin-top: 20px;">
+
+<img src="images/Feature_attribute_reads.svg" class="centerimg" style="width: 90%; margin-top: 20px;">
+
+<!-- 
 
 ## Running FeatureCounts
 
@@ -112,6 +138,7 @@ GTF for the mouse GRCm38 genome assembly.
 * **`-a`** - the gene annotation reference file
 * **`-o`** - the name for the output files
 
+--> 
 
 # And now onto the Exercise...
 
