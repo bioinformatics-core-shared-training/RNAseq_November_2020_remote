@@ -88,18 +88,24 @@ output:
 
 ## RNAseq Workflow
 
+
 <div style="width: 40%; 
             float: left"> 
+
             
-<div class="wkfthree">
+<div class="wkfthree2">
+<span style="color: #8b0000;">**Experimental Design**</span>
+</div>
+
+<div class="wkfthree2">
 <span style="color: #2e2892;">**Library Preparation**</span>
 </div>
 
-<div class="wkfthree">
+<div class="wkfthree2">
 <span style="color: #2e2892;">**Sequencing**</span>
 </div>
 
-<div class="wkfthree">
+<div class="wkfthree2">
 <span style="color: #2e2892;">**Bioinformatics Analysis**</span>
 </div>
 </div>
@@ -113,6 +119,7 @@ output:
 <div style="text-align: right">
 <p style="font-size: 14px">Image adapted from: Wang, Z., et al. (2009), Nature Reviews Genetics, 10, 57–63.</p>
 </div>
+
 
 <!---
 ## Designing the right experiment
@@ -264,13 +271,6 @@ Poly-A transcripts + Other mRNAs e.g.:
 </div>
 </div>
 
-## Library preparation
-
-<img src="images/IlluminaLibraryPrep1.png" class="centerimg" style="width: 85%">
-
-## Library preparation
-
-<img src="images/IlluminaLibraryPrep2.png" class="centerimg" style="width: 85%">
 
 ## Capturing Variance - Replication
 
@@ -397,6 +397,34 @@ Replicates are from the same individual but processed separately
 ### Multiplexing
 
 <img src="images/multiplexing.jpg" class="centerimg" style="width: 65%">
+
+
+
+
+## Hidden Confounding variables
+
+
+* Think deeply about the samples you are collecting
+
+* This will be covered in more detail tomorrow
+
+
+
+
+## Library preparation
+
+<img src="images/IlluminaLibraryPrep1.png" class="centerimg" style="width: 85%">
+
+## Library preparation
+
+<img src="images/IlluminaLibraryPrep2.png" class="centerimg" style="width: 85%">
+
+## Digitising Oligonucleotides
+
+<img src="images/sequencing.png" class="centerimg" style="width: 100%">
+
+<img src="images/sequencing2.png" class="centerimg" style="width: 100%">
+
 
 ## Differential Gene Expression Analysis Workflow {#less_space_after_title}
 

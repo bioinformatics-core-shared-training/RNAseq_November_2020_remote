@@ -134,7 +134,12 @@ but there are lots of other parameters which you can find to tailor your QC by t
 <img src="images/bad4.png" style="width: 100%">
 </div> 
 
-# And now onto the exercise...
+
+## And now onto the exercise...
+
+* Go to: https://ushers.bio.cam.ac.uk/guacamole2
+
+* Log on with YOUR credentials that were emailed to you
 
 
 
