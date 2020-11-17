@@ -100,6 +100,13 @@ but there are lots of other parameters which you can find to tailor your QC by t
 
 ## Per sequence GC content
 
+<!--
+Ash: the bad GC content plot is some data I worked on. The bimodal distribution 
+is because this was C. elegans - mean GC ~36%: first distribution - but the culture 
+was badly contaminated with a variety of bacteria, hence the second distribution. 
+The spike is due to severe adapter contamination.
+-->
+
 <div style="width: 47%; 
             float: left">
 <div style="text-align: center;">
