@@ -144,7 +144,7 @@ RNA-seq](html/04_DE_analysis_with_DESeq2.html) - Abbi Edwards
 results](html/05_Annotation_and_Visualisation.html) - Chandra Chilamakuri  
 <!--    - [practical solutions](html/05_Annotation_and_Visualisation.Solutions.html)  -->
 
-15:30 - 17:00 [Gene-set testing](html/06_Gene_set_testing.html) - Ashley Sawle
+15:30 - 17:00 [Gene-set testing](html/06_Gene_set_testing.html) - Ashley Sawle  
     - [slides](html/06_Introduction_to_Functional_Analysis_in_R.html)
 <!--     - [practical solutions](html/06_Gene_set_testing.Solutions.html)  -->
 
