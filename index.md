@@ -121,9 +121,9 @@ Stephane Ballereau
 
 12:30 - 13:30 Lunch
 
-13:30 - 15:30 [Statistical Analysis of Bulk RNAseq Data](html/StatsRNAseq_Couturier_02-07-2020.pdf)    - Dominique-Laurent  
+13:30 - 15:30 [Statistical Analysis of Bulk RNAseq Data](html/StatsRNAseq_Couturier_20201117.pdf)    - Dominique-Laurent  
 Couturier     
-    - [Practical (html)](html/StatsRNAseq_Couturier_20-05-2020.html) [(rmd)](html/StatsRNAseq_Couturier_20-05-2020.Rmd)  
+    - [Practical (html)](html/StatsRNAseq_Couturier_20201117.html) [(rmd)](html/StatsRNAseq_Couturier_20201117.Rmd)  
 
 15:30 - 17:00 [Experimental Design of Bulk RNAseq studies](html/ExperimentalDesignCourse_Nagarajan_20-05-2020.pdf)   - Abbi Edwards   
     - [Practical](html/RNAseq_ExperimentalDesignPractical.pdf)    
