@@ -47,7 +47,7 @@ as we go.
 
 ## Shared Google Document
 
-This [Google Document]() contains useful information and links.
+This [Google Document](https://docs.google.com/document/d/1zXoe3pyWBDbvPZ0JUZu0TU_HLTgFDtDPtL8Bpk0etFc/edit) contains useful information and links.
 
 Please use it to post any questions you have during the course.
 
