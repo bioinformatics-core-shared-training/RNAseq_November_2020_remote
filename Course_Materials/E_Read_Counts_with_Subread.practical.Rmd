@@ -52,13 +52,15 @@ Materials](../Supplementary_Materials/S1_Getting_raw_reads_from_SRA.html).
 > ```
 > cd ~/CourseMaterials/
 > 
-> cut -f 3 references/Mus_musculus.GRCm38.97.gtf | sort | uniq -c
+> tail -n +6 references/Mus_musculus.GRCm38.97.gtf | cut -f 3 | sort | uniq -c
 > ```
 > N.B. The `|` symbol is known as the "pipe", it "pipes" the output of the first 
 > command into the next command.
 > 
 > The above commands are:
 > 
+> - `tail -n +6` - start on the 6th line (skipping the first 5 lines which 
+> contain the GTF headers)
 > - `cut -f 3` - extract (*cut* out) the third column (it assumes the columns 
 > are separated by tabs; this can be changed)
 > - `sort` - sort the lines alphabetically
@@ -204,12 +206,13 @@ for each bam file.
 Some library preparation protocols return reads on the same genomic strand as
 the transcript was read from, some return reads on the opposite strand, and
 others return reads from both strands. When working with data from a stranded
-protocol, specifying strandedness will avoid counting reads that are aligned to
+protocol, specifying strandness will avoid counting reads that are aligned to
 the wrong strand - these may be due to overlapping genes or due to
 sequencing/mapping errors.
 
-`featureCounts` has a parameter that allows us to specify the "strandedness" of 
-the library prep method used. The default is to assume an unstranded protocol.
+`featureCounts` has a parameter that allows us to perform strand-specific read
+counting by specifying the "strandness" of the library prep method used. The
+default is to assume an unstranded protocol.
 
 ### Exercise 5
 
@@ -231,7 +234,7 @@ include it in the output counts table.
 
 > Rerun `featureCounts` on `bam/MCL1.DL.sorted.bam`, but this time also 
 > extract the "gene_biotype" from the GTF file and output to a new file called
-> `MCL1.DL.gene_biotype.featureCounts`.
+> `counts/MCL1.DL.gene_biotype.featureCounts`.
 >
 > Q. What proporion of the genes are protein coding? (Hint: To count the 
 > bioyptes, see the section above where we counted the feature types in the GTF
