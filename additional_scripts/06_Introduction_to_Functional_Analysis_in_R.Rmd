@@ -168,13 +168,15 @@ tab %>%
 
 ## GSEA: Calculate the enrichment score
 
-* Identify genes in list
+* Calculate the enrichment score ... start at 0 and an enrichment score 
+of 0
 
 <div style="width: 80%; margin-left: 13%">
 ```{r Ranking, echo = FALSE, dpi = 300, fig.width= 4, fig.height=2.5}
 tab %>%  
     ggplot(aes(x=Index2)) +
     geom_segment(aes(xend=Index2, colour=inGeneListA), y=-0.5, yend=0.5) +
+    geom_point(x=0, y=0, size=1, colour = "black") +
     scale_y_continuous(limits=c(-2,4)) +
     labs(x="Ranking Index", y="Enrichment Score") +
     scale_colour_manual(values=c("darkgrey", "red")) +
@@ -230,7 +232,7 @@ tab %>%
 ```{r anim2, echo=FALSE}
 p <- tab %>% 
     ggplot(aes(x=Index2)) +
-    geom_segment(aes(xend=Index2, colour=inGeneListA,
+    geom_segment(aes(xend=Index2, colour=inGeneListB,
                      group=seq_along(Index2)), 
                   y=-0.5, yend=0.5) +
     geom_line(aes(y=CumScoreB)) +
