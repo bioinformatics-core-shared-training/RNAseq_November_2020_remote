@@ -79,7 +79,7 @@ we will all need to follow a [few simple rules](https://docs.google.com/presenta
 
 ## Timetable
 
-**As we have taught this course remotely only once before, all times here should be
+**We are still learning how to teach this course remotely, all times here should be
 regarded as aspirations**
 
 ### Day 1
