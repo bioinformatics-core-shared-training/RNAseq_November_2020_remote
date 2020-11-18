@@ -15,13 +15,13 @@ editor_options:
 
 # Introduction
 
-In this section we will begin the process of analysing the RNAseq in R. In the
+In this section we will begin the process of analysing the RNAseq data in R. In the
 next section we will use [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
 for differential analysis. A detailed analysis workflow, recommended by the authors of DESeq2 can be found
 on [the Bionconductor 
 website](http://master.bioconductor.org/packages/release/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html).
 
-Before we do that we need to:
+We first need to:
 
 * import our counts into R
 * manipulate the imported data so that it is in the correct format for DESeq2
@@ -35,7 +35,6 @@ First, let's load all the packages we will need to analyse the data.
 ```{r setup, message = FALSE}
 library(DESeq2)
 library(tidyverse)
-#options(digits=22)
 ```
 
 ## Mouse mammary gland dataset
@@ -43,7 +42,7 @@ library(tidyverse)
 The data for this tutorial comes from a Nature Cell Biology paper,
 [*EGF-mediated induction of Mcl-1 at the switch to lactation is essential for
 alveolar cell survival*](https://www.nature.com/articles/ncb3117)
-[@Fu2015]. The raw data (sequence reads) can be downloaded from SRA under
+[@Fu2015]. The raw data (sequence reads) can be downloaded from the 'Sequence Read Archive' (SRA) under
 [SRP045534](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?study=SRP045534),
 and processed data (counts) can be downloaded from Gene Expression Omnibus 
 database (GEO) under accession number
@@ -61,8 +60,8 @@ cell type and mouse status. Each group contains two biological replicates.
 
 ## Reading in the sample metadata
 
-The `sampleinfo` file contains basic information about the samples that we will
-need for the analysis today.
+The `SampleInfo.txt` file contains basic information about the samples that we will
+need for the analysis today: name, cell type, status.
 
 ```{r loadSampleInfo, message = FALSE}
 # Read the sample information into a data frame
@@ -77,7 +76,7 @@ genome from Ensembl. featureCounts [@Liao2014] was used to count reads against
 the Ensembl gene annotation and generate a counts matrix (as described in 
 [the previous session](E_Read_Counts_with_Subread.practical.html)).
 
-First we need to read the data into R from the file in the *data* directory.
+First we need to read the data into R from the file kept in the *data* directory.
 
 ```{r loadData, message = FALSE}
 # Read the data into R
@@ -85,9 +84,9 @@ seqdata <- read_tsv("data/GSE60450_Lactation.featureCounts", comment="#")
 seqdata
 ```
 
-In the `seqdata` object each row represents a gene. Columns are:
+In the `seqdata` object each row represents a gene and columns are:
 
-   1 *Geneid* - Ensembl ID  
+   1 *Geneid* - Gene Ensembl ID  
  2-5 *Chr*, *Start*, *End*, *Strand* - Genomic locations of exons of the gene  
    6 *Length* - Transcript length of the gene  
 7-18 One column for each sample with the number of reads assigned to the gene
@@ -104,13 +103,13 @@ called the "pipe", which makes the code a bit tidier.
 In particular we will use the commands:
 
 * `select` to select columns from a table
-* `filter` to filter rows based on the contents of a columns in the table
+* `filter` to filter rows based on the contents of a column in the table
 * `rename` to rename columns
 
 We will encounter a few more `dplyr` commands during the course, we will explain
 their use as we come to them.
 
-If you are familiar with R but not `dplyr` or the `tidyverse` then we have a very
+If you are familiar with R but not `dplyr` or `tidyverse` then we have a very
 brief introduction [here](../extended_html/02a_A_brief_intro_to_dplyr.html). A more detailed 
 introduction can be found in our [online R course](https://bioinformatics-core-shared-training.github.io/r-intro/week4.html)
 
@@ -119,17 +118,17 @@ introduction can be found in our [online R course](https://bioinformatics-core-s
 We will be manipulating and reformating the counts matrix into a suitable
 format for DESeq2.
 
-The `seqdata` is a `dataframe` in which the first six columns contain annotation
-information and the remaining columns contain the count data.
+The `seqdata` object is a `dataframe` in which the first six columns contain gene annotation
+information and the remaining columns the count data.
 
 DESeq2 requires a simple object containing only the count data, we'll keep the
 gene ID by setting them as the row names.
 
-Let's create new counts data object, `countdata`, that contains only the
+We will create a new counts data object, `countdata`, that contains only the
 counts for the 12 samples.  
 
 Our `sampleinfo` object contains a column with the sample names. We should
-adjust the column names of our matrix to match them - we just need to remove
+adjust the column names of our count matrix to match them - we just need to remove
 the `.bam` suffix. 
 
 It is also *critical* to ensure that the samples in the columns are in the same
@@ -166,13 +165,13 @@ The `stringr` package has a lots of useful functions for manipulating strings
 <!-- prefiltering -->
 
 For many analysis methods it is advisable to filter out as many genes as 
-possible prior to starting the analysis in order to decrease the impact on false
-discovery rates when applying multiple testing correction. This is normally done
-by filtering out genes with low numbers of reads, which are likely to be 
+possible before the analysis to decrease the impact of multiple testing
+correction on false discovery rates. This is normally done
+by filtering out genes with low numbers of reads and thus likely to be 
 uninformative.
 
-With `DESeq` this is not necessary as it applies a process it calls `independent
-filtering` during the analysis process. On the other hand, some filtering for 
+With `DESeq2` this is however not necessary as it applies `independent
+filtering` during the analysis. On the other hand, some filtering for 
 genes that are very lowly expressed does reduce the size of the data matrix, 
 meaning that less memory is required and processing steps are carried out 
 faster.
@@ -181,10 +180,16 @@ We will keep all genes where the total number of reads across all samples is
 greater than 5.
 
 ```{r filterGenes}
+# check dimension of count matrix
 dim(countdata)
+# for each gene, compute total number of counts and compare to threshold
+# keeping outcome in vector of 'logicals' (ie TRUE or FALSE, or NA)
 keep <- rowSums(countdata) > 5
-table(keep, useNA="always") # summary of test outcome 
+# summary of test outcome: number of genes in each class:
+table(keep, useNA="always") 
+# subset genes where test was TRUE
 countdata <- countdata[keep,]
+# check dimension of new count matrix
 dim(countdata)
 ```
 
@@ -195,50 +200,53 @@ important to assess the quality of our data.
 
 ## Data transformations and visualization
 
+Differential expression calculations with DESeq2 uses raw read counts as input,
+but for visualization purposes we use transformed counts.
+
 ### Raw counts 
 
-Although, for differential expression calculations we use raw reads, for all the visualization purposes we use transformed counts.
-
 Why not raw counts? Two issues:
-  
-    * Raw counts range is very high 
-    
-    * Variance increases with mean gene expression, this has impact on assessing 
-      the relationships.
 
-```{r raw_range}
-range(countdata)
+* Raw counts range is very large
+* Variance increases with mean gene expression, this has impact on assessing
+  the relationships.
+
+```{r raw_summary}
+summary(countdata)
 ```
 
 ```{r raw_boxplot}
-# few outliers have impact on distribution visualization
-boxplot(countdata, main='Raw counts distribution', las=2)
+# few outliers affect distribution visualization
+boxplot(countdata, main='Raw counts', las=2)
 ```
 
 ```{r raw_mean_vs_sd}
 # Raw counts mean expression Vs standard Deviation (SD)
 plot(rowMeans(countdata), rowSds(countdata), 
-     main='Raw Counts : Mean Vs SD', 
-     xlim=c(0,10000), 
-     ylim=c(0,5000))
+     main='Raw counts: sd vs mean', 
+     xlim=c(0,10000)#,
+     #ylim=c(0,5000))
 ```
 
+<!--
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+-->
 
-### Data transformation 
-To avoid problems posed by raw counts, raw reads can be transformed.
+### Data transformation
 
-  * Simple log2 transformation
-  
-  * VST : variance stabilizing transformation
-  
-  * rlog : regularized log transformation
+To avoid problems posed by raw counts, they can be [transformed](http://www.bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#data-transformations-and-visualization).
+Several transformation methods exist to limit the dependence of variance on mean gene expression:
+
+* Simple log2 transformation
+* VST : variance stabilizing transformation
+* rlog : regularized log transformation
 
 <p>&nbsp;</p>
 
-#### log2 transformation 
-Because the data is count data and will contain many `0`s  (log2(0) = -Inf), we need to add a count of 1 to every value in order to prevent attempting `log2(0)` from creating (-Inf values) errors.
+#### log2 transformation
+
+Because some genes are not expressed (detected) in some samples, their count are `0`. As log2(0) returns -Inf in R which triggers errors by some functions, we add 1 to every count value to create 'pseudocounts'. The lowest value then is 1, or 0 on the log2 scale (log2(1) = 0).
 
 ```{r logTransform}
 # Get log2 counts
@@ -247,40 +255,47 @@ logcounts <- log2(countdata + 1)
 # summary(logcounts) # summary for each column
 ```
 
-We'll check the distribution of read counts using a boxplot and add some
+We will check the distribution of read counts using a boxplot and add some
 colour to see if there is any difference between sample groups.
 
 ```{r plotLogCounts}
 # make a colour vector
-statusCol <- match(sampleinfo$Status, c("virgin", "pregnant", "lactate")) + 1
+statusCol <- match(sampleinfo$Status, c("virgin", "pregnant", "lactate")) + 1 # '+1' to avoid color '1' i.e. black
 
 # Check distributions of samples using boxplots
-boxplot(logcounts, 
-        xlab="", 
+boxplot(logcounts,
+        xlab="",
         ylab="Log2(Counts)",
         las=2,
-        col=statusCol)
+        col=statusCol,
+        main="Log2(Counts)")
 # Let's add a blue horizontal line that corresponds to the median
 abline(h=median(logcounts), col="blue")
 ```
 
 From the boxplots we see that overall the density distributions of raw
 log-counts are not identical but still not very different. If a sample is
-really far above or below the blue horizontal line we may need to investigate
+really far above or below the blue horizontal (overall median) line we may need to investigate
 that sample further.
 
 ```{r log2_mean_vs_sd}
-# Log2 counts mean expression Vs standard Deviation (SD)
+# Log2 counts standard deviation (sd) vs mean expression
 plot(rowMeans(logcounts), rowSds(logcounts), 
-     main='Log2 Counts : Mean Vs SD')
+     main='Log2 Counts: sd vs mean')
 ```
 
-Unlike in raw counts, in log2 transformed counts, lowly expressed genes show higher variation. 
+In contrast to raw counts, with log2 transformed counts lowly expressed genes show higher variation.
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 #### VST : variance stabilizing transformation
+
+Variance stabilizing transformation (VST) aims at generating a matrix of values for which variance is constant across the range of mean values, especially for low mean.
+
+The `vst` function computes the fitted dispersion-mean relations and accounts for library size.
+
+"Both transformations produce transformed data on the log2 scale which has been normalized with respect to library size or other normalization factors."
 
 ```{r vst_counts}
 vst_counts <- vst(countdata)
@@ -296,17 +311,13 @@ boxplot(vst_counts,
         col=statusCol)
 # Let's add a blue horizontal line that corresponds to the median
 abline(h=median(vst_counts), col="blue")
-
 ```
-
 
 ```{r vst_mean_vs_sd}
-# VST counts mean expression Vs standard Deviation (SD)
+# VST counts standard deviation (sd) vs mean expression
 plot(rowMeans(vst_counts), rowSds(vst_counts), 
-     main='VST Counts : Mean Vs SD')
+     main='VST Counts: Mean Vs SD')
 ```
-
-VST and rlog transformations tries to break the dependence of variance on mean gene expression.
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -320,7 +331,7 @@ VST and rlog transformations tries to break the dependence of variance on mean g
 
 ```{r proProcObjChal1, echo=FALSE, eval=FALSE}
 # have object ready for challenge
-# need countdata, sampleinfo
+# need countdata and sampleinfo
 save(countdata, sampleinfo, file="Robjects/preprocessingChal1.RData")
 ```
 
@@ -334,7 +345,7 @@ save(countdata, sampleinfo, file="Robjects/preprocessingChal1.RData")
 ## Principal Component Analysis
 
 A principal component analysis (PCA) is an example of an unsupervised analysis,
-where we don't specify the grouping of the samples. If your experiment is well
+where we don't specify the grouping of the samples. If the experiment is well
 controlled and has worked well, we should find that replicate samples cluster 
 closely, whilst the greatest sources of variation in the data should be between
 treatments/sample groups. It is also an incredibly useful tool for checking for 
@@ -365,8 +376,10 @@ rlogcounts <- rlog(countdata)
 pcDat <- prcomp(t(rlogcounts))
 # plot PCA
 autoplot(pcDat)
-# We can use colour and shape to identify the Cell Type and the Status of each
-# sample
+```
+We can use colour and shape to identify the Cell Type and the Status of each sample.
+
+```{r pcaPlotWiColor, message = FALSE, fig.width=6.5, fig.height=5, fig.align="center"}
 autoplot(pcDat,
          data = sampleinfo, 
          colour="CellType", 
@@ -387,7 +400,7 @@ labels overlapping (they *repel* each other).
 ```{r badSamples, fig.width=6.5, fig.height=5, fig.align="center"}
 library(ggrepel)
 
-# setting shape to FALSE causes the plot to default to using the labels
+# setting shape to FALSE causes the plot to default to using the labels instead of points
 autoplot(pcDat,
          data = sampleinfo, 
          colour="CellType", 
