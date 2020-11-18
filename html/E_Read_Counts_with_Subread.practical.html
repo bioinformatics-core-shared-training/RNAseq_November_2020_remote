@@ -413,7 +413,7 @@ summary {
 <h1 class="title toc-ignore">RNA-seq analysis in R</h1>
 <h3 class="subtitle">Counting reads with SubRead</h3>
 <h4 class="author">Stephane Ballereau, Dominique-Laurent Couturier, Mark Dunning, Abbi Edwards, Ashley Sawle</h4>
-<h4 class="date">Last modified: 17 Nov 2020</h4>
+<h4 class="date">Last modified: 18 Nov 2020</h4>
 
 </div>
 
@@ -428,6 +428,7 @@ summary {
 </ul></li>
 <li><a href="#the-output-files">3. The output files</a></li>
 <li><a href="#running-featurecounts-on-multiple-samples">4. Running <code>featureCounts</code> on multiple samples</a><ul>
+<li><a href="#wildcards-in-file-names">Wildcards in file names</a></li>
 <li><a href="#exercise-4">Exercise 4</a></li>
 </ul></li>
 <li><a href="#library-preparation-strandedness-and-featurecounts">5. Library preparation strandedness and <code>featureCounts</code></a><ul>
@@ -524,16 +525,21 @@ tail -n +6 references/Mus_musculus.GRCm38.97.gtf | cut -f 3 | sort | uniq -c</co
 <div id="running-featurecounts-on-multiple-samples" class="section level2">
 <h2>4. Running <code>featureCounts</code> on multiple samples</h2>
 <p>We can also run <strong><code>featureCounts</code></strong> on all of our BAM together in one command. As explained by the <strong>usage</strong> in the help page, we can specify multiple input files (bam files in our case) one by one after the command.</p>
-<p>If we had many bam files to include it would be very time consuming to type out each file name and would result in a very long and difficult to read command. Instead, there is a quick way to refer to many files at once on the command line using “wild cards”. Suppose we had a directory called <code>myData</code> containing:</p>
+<p>If we had many bam files to include it would be very time consuming to type out each file name and would result in a very long and difficult to read command. Instead, there is a quick way to refer to many files at once on the command line using “wild cards”.</p>
+<div id="wildcards-in-file-names" class="section level3">
+<h3>Wildcards in file names</h3>
+<p>Suppose we had a directory called <code>myData</code> containing:</p>
 <pre><code>myFile_A01.txt
 myFile_B02.txt
 myFile_C03.txt
 myFile_D04.txt
 myFile_E15.txt</code></pre>
-<p>We can refer to all of these files by replacing the part of the file name that changes with an asterix: <code>myData/myFile_*.txt</code>.</p>
-<p>The asterix means essentially means ‘replace this with anything’. So <code>myFile_*.txt</code> will be replaced with a list of all the files that could match.</p>
+<p>We could refer to all of these files by replacing the part of the file name that changes with an asterix:</p>
+<p><code>myData/myFile_*.txt</code></p>
+<p>The asterix means essentially means ‘replace this with anything’. So <code>myFile_*.txt</code> will be expanded to a list of all the files that could match.</p>
 <p>In the metrics directory we have an RNAseq metrics file for each bam file called <code>MCL1.DG.rna_metrics.txt</code>, <code>MCL1.DG.rna_metrics.txt</code>, <code>MCL1.DG.rna_metrics.txt</code> … <code>MCL1.LE.rna_metrics.txt</code>.</p>
 <p>Try <code>head -n 1 metrics/MCL1.*.rna_metrics.txt</code> to look at the first line of each RNAseq metrics file in the <code>metrics</code> directory.</p>
+</div>
 <div id="exercise-4" class="section level3">
 <h3>Exercise 4</h3>
 <blockquote>
@@ -542,7 +548,7 @@ myFile_E15.txt</code></pre>
 <li>To save time we will use versions of our BAM files that only include reads aligned to chromosome 15. You can find these in <strong><code>small_bams</code></strong> directory.</li>
 <li>There is also a gtf that only contains chr 15 in the reference directory, use this instead of the full gtf.</li>
 <li>output the results to a new file called <code>counts/GSE60450_Lactation.chr15.featureCounts</code></li>
-<li>Specify the inpute (bam) files to count using the &quot;*&quot; wildcard.</li>
+<li>Specify the input (bam) files using the * wildcard.</li>
 </ol>
 </blockquote>
 <p>The output should be a combined a summary file and the counts table with the initial columns as before, but now there should be one results/counts column for each bam file.</p>
@@ -550,13 +556,14 @@ myFile_E15.txt</code></pre>
 </div>
 <div id="library-preparation-strandedness-and-featurecounts" class="section level2">
 <h2>5. Library preparation strandedness and <code>featureCounts</code></h2>
-<p>Some library preparation protocols return reads on the same genomic strand as the transcript was read from, some return reads on the opposite strand, and others return reads from both strands. When working with data from a stranded protocol, specifying strandness will avoid counting reads that are aligned to the wrong strand - these may be due to overlapping genes or due to sequencing/mapping errors.</p>
+<p>Some mRNAseq library preparation protocols return reads on the same genomic strand as the transcript was read from, some return reads on the opposite strand, and others return reads from both strands. When working with data from a stranded protocol, specifying strandness will avoid counting reads that are aligned to the wrong strand - these may be due to overlapping genes or due to sequencing/mapping errors.</p>
 <p><code>featureCounts</code> has a parameter that allows us to perform strand-specific read counting by specifying the “strandness” of the library prep method used. The default is to assume an unstranded protocol.</p>
 <div id="exercise-5" class="section level3">
 <h3>Exercise 5</h3>
 <blockquote>
-<p>Rerun <code>featureCounts</code> on <code>bam/MCL1.DL.sorted.bam</code>, but this time specify “reversely stranded” (use the help to see how to do this) and output the results to a new file called <code>counts/MCL1.DL.reverse.featureCounts</code>.</p>
-<p>Q. Compare the summary of the read count assignments to our intial results using the default. Which type of protocol do you think was used to generate this library?</p>
+<p>Rerun <code>featureCounts</code> on <code>bam/MCL1.DL.sorted.bam</code>, but this time specify “reversely stranded”. Use the help to find out which option you need to set to do this: <code>featureCounts -h</code></p>
+<p>Output the results to a new file called <code>counts/MCL1.DL.reverse.featureCounts</code>.</p>
+<p>Q. Compare the summary of the read count assignments to our intial results where we used the default settings (unstrandned). Which type of protocol do you think was used to generate this library?</p>
 </blockquote>
 </div>
 </div>

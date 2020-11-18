@@ -162,7 +162,11 @@ files (bam files in our case) one by one after the command.
 If we had many bam files to include it would be very time consuming to type out
 each file name and would result in a very long and difficult to read command.
 Instead, there is a quick way to refer to many files at once on the command line
-using "wild cards". Suppose we had a directory called `myData` containing:
+using "wild cards". 
+
+### Wildcards in file names
+
+Suppose we had a directory called `myData` containing:
 
 ```
 myFile_A01.txt
@@ -172,11 +176,13 @@ myFile_D04.txt
 myFile_E15.txt
 ```
 
-We can refer to all of these files by replacing the part of the file name that 
-changes with an asterix: `myData/myFile_*.txt`. 
+We could refer to all of these files by replacing the part of the file name that 
+changes with an asterix: 
+
+`myData/myFile_*.txt`
 
 The asterix means essentially means 'replace this with anything'. So 
-`myFile_*.txt` will be replaced with a list of all the files that could match.
+`myFile_*.txt` will be expanded to a list of all the files that could match.
 
 In the metrics directory we have an RNAseq metrics file for each bam file called
 `MCL1.DG.rna_metrics.txt`, `MCL1.DG.rna_metrics.txt`, `MCL1.DG.rna_metrics.txt` 
@@ -195,7 +201,7 @@ RNAseq metrics file in the `metrics` directory.
 > use this instead of the full gtf.
 > iii) output the results to a new file called 
 > `counts/GSE60450_Lactation.chr15.featureCounts`
-> iv) Specify the inpute (bam) files to count using the "*" wildcard.
+> iv) Specify the input (bam) files using the * wildcard.
 
 The output should be a combined a summary file and the counts table with the 
 initial columns as before, but now there should be one results/counts column
@@ -203,11 +209,11 @@ for each bam file.
 
 ## 5. Library preparation strandedness and `featureCounts`
 
-Some library preparation protocols return reads on the same genomic strand as
-the transcript was read from, some return reads on the opposite strand, and
-others return reads from both strands. When working with data from a stranded
-protocol, specifying strandness will avoid counting reads that are aligned to
-the wrong strand - these may be due to overlapping genes or due to
+Some mRNAseq library preparation protocols return reads on the same genomic
+strand as the transcript was read from, some return reads on the opposite
+strand, and others return reads from both strands. When working with data from a
+stranded protocol, specifying strandness will avoid counting reads that are
+aligned to the wrong strand - these may be due to overlapping genes or due to
 sequencing/mapping errors.
 
 `featureCounts` has a parameter that allows us to perform strand-specific read
@@ -217,12 +223,14 @@ default is to assume an unstranded protocol.
 ### Exercise 5
 
 > Rerun `featureCounts` on `bam/MCL1.DL.sorted.bam`, but this time specify 
-> "reversely stranded" (use the help to see how to do this) and output the 
-> results to a new file called `counts/MCL1.DL.reverse.featureCounts`. 
+> "reversely stranded". Use the help to find out which option you need to set to
+> do this: `featureCounts -h`
+> 
+> Output the results to a new file called `counts/MCL1.DL.reverse.featureCounts`. 
 >
 > Q. Compare the summary of the read count assignments to our intial results 
-> using the default. Which type of protocol do you think was used to generate 
-> this library? 
+> where we used the default settings (unstrandned). Which type of protocol do 
+> you think was used to generate this library? 
 
 ## 6. Supplementary: extracting additional attribute information
 
