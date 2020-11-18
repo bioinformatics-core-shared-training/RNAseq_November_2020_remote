@@ -13,18 +13,14 @@ layout: page
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(fgsea)
-library(goseq)
 library(clusterProfiler)
 library(pathview)
+library(org.Mm.eg.db)
+knitr::opts_knit$set(cache=TRUE)
 ```
 
-```{r prepareData, include=FALSE}
-load("Robjects/Annotated_Results_LvV.RData")
-# fgsea data
-gseaDat <- filter(shrinkLvV, !is.na(Entrez))
-ranks <- gseaDat$logFC
-load("Robjects/mouse_H_v5.RData")
-pathwaysH <- Mm.H
+```{r prepareORAData, include=FALSE}
+load("../Robjects/Annotated_Results_LvV.RData")
 # Kegg data
 sigGenes <- shrinkLvV$Entrez[ shrinkLvV$FDR < 0.01 & 
                               !is.na(shrinkLvV$FDR) &
@@ -33,12 +29,12 @@ sigGenes <- na.exclude(sigGenes)
 kk <- enrichKEGG(gene = sigGenes, organism = 'mmu')
 ```
 
-### Challenge 1
+## Challenge 1
 
 > 1. Use `pathview` to export a figure for "mmu04060", but this time only
 > use genes that are statistically significant at FDR < 0.01
 
-```{r solution3}
+```{r solution1}
 sigGenes <- shrinkLvV$FDR < 0.01 & !is.na(shrinkLvV$FDR)
 
 logFC <- shrinkLvV$logFC[sigGenes]
@@ -52,34 +48,97 @@ pathview(gene.data = logFC,
 
 mmu04060.pathview.png:
 
-![mmu04060 -Cytokine-cytokine receptor interaction](../images/mmu04060.pathview.png)
+![mmu04060 -Cytokine-cytokine receptor interaction](../../images/mmu04060.pathview.png)
 
-### Challenge 2
+## Challenge 2 - GO term enrichment analysis
 
-Another common way to rank the genes is to order by pvalue, but also, sorting
-so that upregulated genes are at start and downregulated at the other - 
-you can do this combining the sign of the fold change and the pvalue.
+> `clusterProfiler` can also perform over-representation analysis on GO terms.
+> using the commmand `enrichGO`. Look at the help page for the command 
+> `enrichGO` (`?enrichGO`) and have a look at the instructions in the 
+> [clusterProfiler book](http://yulab-smu.top/clusterProfiler-book/chapter5.html#go-over-representation-test).
+>
+> 1. Run the over-representation analysis for GO terms 
+>     - Test terms in the "Molecular Function" ontology 
+>     - Use genes that have an adjusted p-value (FDR) of less than 0.01 and
+> an absolute fold change greater than 2.    
+>     - The mouse database package is called `org.Mm.eg.db`. You'll need to load
+>  it using `library` before running the analysis.    
+>     - For this analysis you can use Ensembl IDs rather then Entrez - you'll
+> need to set the `keyType` parameter in the `enrichGO` command.
+> 2. Use the `dotplot` function to visualise the results.
 
+```{r solution2}
+library(org.Mm.eg.db)
+sigGenes <- shrinkLvV %>% 
+    drop_na(FDR) %>% 
+    filter(FDR < 0.01 & abs(logFC) > 1) %>% 
+    pull(GeneID)
+
+universe <- shrinkLvV %>% 
+    drop_na(Entrez, FDR) %>% 
+    pull(GeneID)
+
+ego <- enrichGO(gene          = sigGenes, 
+                universe      = universe,
+                OrgDb         = org.Mm.eg.db,
+                keyType       = "ENSEMBL",
+                ont           = "MF",
+                pvalueCutoff  = 0.01,
+                readable      = TRUE)
+dotplot(ego)
+```
+
+## Challenge 3
+
+> Another common way to rank the genes is to order by pvalue, but also, sorting
+> so that upregulated genes are at start and downregulated at the other - 
+> you can do this combining the sign of the fold change and the pvalue. 
+> 
 > 1. Rank the genes by statisical significance - you will need to create
 > a new ranking value using `-log10({p value}) * sign({Fold Change})`  
-> 2. Load the "C2" pathways from the the `data/mouse_c2_v5.RData` file  
+> 2. Load the "C2" pathways from the the `Robjects/mouse_c2_v5.RData` file   
 > 3. Run `fgsea` using the new ranked genes and the C2 pathways  
-> 4. Run `fgsea` using the new ranked genes and the H pathways. How do these 
-> results differ from the ones we got when ranking by the fold change alone?  
 
-```{r solution1}
+
+```{r prepareGSEAData, include=FALSE}
+# fgsea data
+gseaDat <- filter(shrinkLvV, !is.na(Entrez))
+ranks <- gseaDat$logFC
+load("../Robjects/mouse_H_v5.RData")
+pathwaysH <- Mm.H
+```
+
+```{r solution3b, eval=FALSE}
 ranks <- -log10(gseaDat$pvalue) * sign(gseaDat$logFC) # or gseaDat$stat
 names(ranks) <- gseaDat$Entrez  
 
 load("Robjects/mouse_c2_v5.RData")
-pathwaysC2 <- Mm.c2
 
-fgseaResC2 <- fgsea(pathwaysC2, ranks, minSize=15, maxSize = 500, nperm=1000)
+fgseaResC2 <- fgsea(Mm.c2, ranks, minSize=15, maxSize = 500)
 head(fgseaResC2[order(padj, -abs(NES)), ], n=10)
+```
 
-fgseaResH <- fgsea(pathwaysH, ranks, minSize=15, maxSize = 500, nperm=1000)
+```{r solution3, echo=FALSE}
+ranks <- -log10(gseaDat$pvalue) * sign(gseaDat$logFC) # or gseaDat$stat
+names(ranks) <- gseaDat$Entrez  
+
+load("../Robjects/mouse_c2_v5.RData")
+
+fgseaResC2 <- fgsea(Mm.c2, ranks, minSize=15, maxSize = 500)
+head(fgseaResC2[order(padj, -abs(NES)), ], n=10) %>% tibble()
+```
+
+> 4. Run `fgsea` using the new ranked genes and the H pathways. How do these 
+> results differ from the ones we got when ranking by the fold change alone? 
+
+```{r solution3.4b, eval=FALSE}
+fgseaResH <- fgsea(Mm.H, ranks, minSize=15, maxSize = 500)
 head(fgseaResH[order(padj, -abs(NES)), ], n=20)
 ```
 
+```{r solution3.4, echo=FALSE}
+fgseaResH <- fgsea(Mm.H, ranks, minSize=15, maxSize = 500)
+head(fgseaResH[order(padj, -abs(NES)), ], n=20) %>% tibble()
+```
 
 
