@@ -224,8 +224,8 @@ boxplot(countdata, main='Raw counts', las=2)
 # Raw counts mean expression Vs standard Deviation (SD)
 plot(rowMeans(countdata), rowSds(countdata), 
      main='Raw counts: sd vs mean', 
-     xlim=c(0,10000))#,
-     #ylim=c(0,5000))
+     xlim=c(0,10000),
+     ylim=c(0,5000))
 ```
 
 <!--
@@ -260,7 +260,8 @@ colour to see if there is any difference between sample groups.
 
 ```{r plotLogCounts}
 # make a colour vector
-statusCol <- match(sampleinfo$Status, c("virgin", "pregnant", "lactate")) + 1 # '+1' to avoid color '1' i.e. black
+statusCol <- match(sampleinfo$Status, c("virgin", "pregnant", "lactate")) + 1
+# '+1' to avoid color '1' i.e. black
 
 # Check distributions of samples using boxplots
 boxplot(logcounts,
@@ -293,9 +294,7 @@ In contrast to raw counts, with log2 transformed counts lowly expressed genes sh
 
 Variance stabilizing transformation (VST) aims at generating a matrix of values for which variance is constant across the range of mean values, especially for low mean.
 
-The `vst` function computes the fitted dispersion-mean relations and accounts for library size.
-
-"Both transformations produce transformed data on the log2 scale which has been normalized with respect to library size or other normalization factors."
+The `vst` function computes the fitted dispersion-mean relation, derives the transformation to apply and accounts for library size.
 
 ```{r vst_counts}
 vst_counts <- vst(countdata)
@@ -377,6 +376,7 @@ pcDat <- prcomp(t(rlogcounts))
 # plot PCA
 autoplot(pcDat)
 ```
+
 We can use colour and shape to identify the Cell Type and the Status of each sample.
 
 ```{r pcaPlotWiColor, message = FALSE, fig.width=6.5, fig.height=5, fig.align="center"}
@@ -440,10 +440,9 @@ autoplot(pcDat,
 
 Replicate samples from the same group cluster together in the plot, while 
 samples from different groups form separate clusters. This indicates that the
-differences between groups are larger than those within groups, i.e.,
-differential expression is greater than the variance and can be detected. The
-differences between virgin, pregnant and lactating are greater for luminal cells
-than for basal.
+differences between groups are larger than those within groups.
+The biological signal of interest is stronger than the noise (biological and technical) and can be detected.
+Also, differences between virgin, pregnant and lactating are greater for luminal than basal cells.
 
 Clustering in the PCA plot can be used to motivate changes to the design
 matrix in light of potential batch effects. For example, imagine that the
