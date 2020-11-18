@@ -224,7 +224,7 @@ boxplot(countdata, main='Raw counts', las=2)
 # Raw counts mean expression Vs standard Deviation (SD)
 plot(rowMeans(countdata), rowSds(countdata), 
      main='Raw counts: sd vs mean', 
-     xlim=c(0,10000)#,
+     xlim=c(0,10000))#,
      #ylim=c(0,5000))
 ```
 
