@@ -105,7 +105,7 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 
 15:30 - 17:00 [Read Counting with SubRead](html/E_Read_Counts_with_Subread.html)   - Ashley Sawle  
     - [Practical](html/E_Read_Counts_with_Subread.practical.html)  
-<!--    - [Practical solutions](html/E_Read_Counts_with_Subread.Solutions.html) -->
+    - [Practical solutions](html/E_Read_Counts_with_Subread.Solutions.html)
 
 <!-- Goodbye: Ash -->
 
