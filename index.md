@@ -101,7 +101,7 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 
 13:45 - 15:30 [QC of alignment](html/D_QC_of_aligned_reads.html) - Zeynep Kalender Atak  
     - [Practical](html/D_QC_of_aligned_reads_practical.html)  
-<!--    - [Practical solutions](html/D_QC_of_aligned_reads.Solutions.html) -->
+    - [Practical solutions](html/D_QC_of_aligned_reads.Solutions.html)
 
 15:30 - 17:00 [Read Counting with SubRead](html/E_Read_Counts_with_Subread.html)   - Ashley Sawle  
     - [Practical](html/E_Read_Counts_with_Subread.practical.html)  
