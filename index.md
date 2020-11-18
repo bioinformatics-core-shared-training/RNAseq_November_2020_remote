@@ -95,7 +95,7 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 
 11:15 - 12:45 [Short read alignment with HISAT2](html/C_Alignment_with_HISAT2.html)   - Zeynep Kalender Atak  
     - [Practical](html/C_Alignment_with_HISAT2_practical.html)  
-<!--    - [Practical solutions](html/C_Alignment_with_HISAT2.Solutions.html) -->
+    - [Practical solutions](html/C_Alignment_with_HISAT2.Solutions.html)
 
 12:45 - 13:45 Lunch
 
