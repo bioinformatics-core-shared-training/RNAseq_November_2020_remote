@@ -91,7 +91,7 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 
 10:15 - 11:15 [Raw read file format and QC](html/B_FastQC.html)   - Jon Price  
     - [Practical](html/B_FastQC_practical.html)  
-<!--    - [Practical solutions](html/B_FastQC_practical.Solutions.html) -->
+    - [Practical solutions](html/B_FastQC_practical.Solutions.html)
 
 11:15 - 12:45 [Short read alignment with HISAT2](html/C_Alignment_with_HISAT2.html)   - Zeynep Kalender Atak  
     - [Practical](html/C_Alignment_with_HISAT2_practical.html)  
