@@ -79,7 +79,7 @@ we will all need to follow a [few simple rules](https://docs.google.com/presenta
 
 ## Timetable
 
-**As we have taught this course remotely only once before, all times here should be
+**We are still learning how to teach this course remotely, all times here should be
 regarded as aspirations**
 
 ### Day 1
@@ -91,11 +91,11 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 
 10:15 - 11:15 [Raw read file format and QC](html/B_FastQC.html)   - Jon Price  
     - [Practical](html/B_FastQC_practical.html)  
-<!--    - [Practical solutions](html/B_FastQC_practical.Solutions.html) -->
+    - [Practical solutions](html/B_FastQC_practical.Solutions.html)
 
 11:15 - 12:45 [Short read alignment with HISAT2](html/C_Alignment_with_HISAT2.html)   - Zeynep Kalender Atak  
     - [Practical](html/C_Alignment_with_HISAT2_practical.html)  
-<!--    - [Practical solutions](html/C_Alignment_with_HISAT2.Solutions.html) -->
+    - [Practical solutions](html/C_Alignment_with_HISAT2.Solutions.html)
 
 12:45 - 13:45 Lunch
 
@@ -121,9 +121,9 @@ Stephane Ballereau
 
 12:30 - 13:30 Lunch
 
-13:30 - 15:30 [Statistical Analysis of Bulk RNAseq Data](html/StatsRNAseq_Couturier_02-07-2020.pdf)    - Dominique-Laurent  
+13:30 - 15:30 [Statistical Analysis of Bulk RNAseq Data](html/StatsRNAseq_Couturier_20201117.pdf)    - Dominique-Laurent  
 Couturier     
-    - [Practical (html)](html/StatsRNAseq_Couturier_20-05-2020.html) [(rmd)](html/StatsRNAseq_Couturier_20-05-2020.Rmd)  
+    - [Practical (html)](html/StatsRNAseq_Couturier_20201117.html) [(rmd)](html/StatsRNAseq_Couturier_20201117.Rmd)  
 
 15:30 - 17:00 [Experimental Design of Bulk RNAseq studies](html/ExperimentalDesignCourse_Nagarajan_20-05-2020.pdf)   - Abbi Edwards   
     - [Practical](html/RNAseq_ExperimentalDesignPractical.pdf)    
