@@ -105,7 +105,7 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 
 15:30 - 17:00 [Read Counting with SubRead](html/E_Read_Counts_with_Subread.html)   - Ashley Sawle  
     - [Practical](html/E_Read_Counts_with_Subread.practical.html)  
-<!--    - [Practical solutions](html/E_Read_Counts_with_Subread.Solutions.html) -->
+    - [Practical solutions](html/E_Read_Counts_with_Subread.Solutions.html)
 
 <!-- Goodbye: Ash -->
 
@@ -117,7 +117,7 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 
 10:15 - 12:30 - [RNA-seq Pre-processing](html/02_Preprocessing_Data.html) - 
 Stephane Ballereau
-<!--    - [Practical solutions](html/02_Preprocessing_Data.Solutions.html)   -->
+    - [Practical solutions](html/02_Preprocessing_Data.Solutions.html)
 
 12:30 - 13:30 Lunch
 
