@@ -101,11 +101,11 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 
 13:45 - 15:30 [QC of alignment](html/D_QC_of_aligned_reads.html) - Zeynep Kalender Atak  
     - [Practical](html/D_QC_of_aligned_reads_practical.html)  
-<!--    - [Practical solutions](html/D_QC_of_aligned_reads.Solutions.html) -->
+    - [Practical solutions](html/D_QC_of_aligned_reads.Solutions.html)
 
 15:30 - 17:00 [Read Counting with SubRead](html/E_Read_Counts_with_Subread.html)   - Ashley Sawle  
     - [Practical](html/E_Read_Counts_with_Subread.practical.html)  
-<!--    - [Practical solutions](html/E_Read_Counts_with_Subread.Solutions.html) -->
+    - [Practical solutions](html/E_Read_Counts_with_Subread.Solutions.html)
 
 <!-- Goodbye: Ash -->
 
@@ -116,8 +116,8 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 9:30 - 10:15  [Introduction to RNAseq Analysis in R](html/01_Introduction_to_RNAseq_Analysis_in_R.html) - Jon Price   
 
 10:15 - 12:30 - [RNA-seq Pre-processing](html/02_Preprocessing_Data.html) - 
-Stephane Ballereau
-<!--    - [Practical solutions](html/02_Preprocessing_Data.Solutions.html)   -->
+Stephane Ballereau  
+    - [Practical solutions](html/02_Preprocessing_Data.Solutions.html)
 
 12:30 - 13:30 Lunch
 
@@ -136,7 +136,8 @@ Couturier
 
 9:30 - 12:15 - [Differential Expression for
 RNA-seq](html/04_DE_analysis_with_DESeq2.html) - Abbi Edwards 
-<!--    - [practical solutions](html/04_DE_analysis.Solutions.html)   -->
+    - [practical solutions](html/04_DE_analysis.Solutions.html)
+    - [Abbi's live script](live_scripts/Deseq2.R)
 
 12:15 - 13:15 Lunch
 
