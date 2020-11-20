@@ -11,11 +11,11 @@ layout: page
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
 library(fgsea)
 library(clusterProfiler)
 library(pathview)
 library(org.Mm.eg.db)
+library(tidyverse)
 knitr::opts_knit$set(cache=TRUE)
 ```
 
@@ -35,10 +35,11 @@ kk <- enrichKEGG(gene = sigGenes, organism = 'mmu')
 > use genes that are statistically significant at FDR < 0.01
 
 ```{r solution1}
-sigGenes <- shrinkLvV$FDR < 0.01 & !is.na(shrinkLvV$FDR)
-
-logFC <- shrinkLvV$logFC[sigGenes]
-names(logFC) <- shrinkLvV$Entrez[sigGenes]
+logFC <- shrinkLvV %>% 
+  drop_na(FDR, Entrez) %>% 
+  filter(FDR < 0.01) %>% 
+  select(Entrez, logFC) %>% 
+  deframe()
 
 pathview(gene.data = logFC, 
          pathway.id = "mmu04060", 
@@ -58,13 +59,16 @@ mmu04060.pathview.png:
 > [clusterProfiler book](http://yulab-smu.top/clusterProfiler-book/chapter5.html#go-over-representation-test).
 >
 > 1. Run the over-representation analysis for GO terms 
->     - Test terms in the "Molecular Function" ontology 
 >     - Use genes that have an adjusted p-value (FDR) of less than 0.01 and
 > an absolute fold change greater than 2.    
+>     - For this analysis you can use Ensembl IDs rather then Entrez
+>     - You'll need to provide the background (`universe`) genes, this should be
+> all the genes in our analysis.
 >     - The mouse database package is called `org.Mm.eg.db`. You'll need to load
 >  it using `library` before running the analysis.    
->     - For this analysis you can use Ensembl IDs rather then Entrez - you'll
-> need to set the `keyType` parameter in the `enrichGO` command.
+>     - As we are using Ensembl IDs, you'll need to set the `keyType` 
+> parameter in the `enrichGO` command to indicate this.
+>     - Only test terms in the "Molecular Function" ontology 
 > 2. Use the `dotplot` function to visualise the results.
 
 ```{r solution2}
@@ -74,9 +78,7 @@ sigGenes <- shrinkLvV %>%
     filter(FDR < 0.01 & abs(logFC) > 1) %>% 
     pull(GeneID)
 
-universe <- shrinkLvV %>% 
-    drop_na(Entrez, FDR) %>% 
-    pull(GeneID)
+universe <- shrinkLvV$GeneID
 
 ego <- enrichGO(gene          = sigGenes, 
                 universe      = universe,

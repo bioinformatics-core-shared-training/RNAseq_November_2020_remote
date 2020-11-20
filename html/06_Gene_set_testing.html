@@ -413,7 +413,7 @@ summary {
 <h1 class="title toc-ignore">RNA-seq analysis in R</h1>
 <h3 class="subtitle">Gene Set Testing for RNA-seq</h3>
 <h4 class="author">Stephane Ballereau, Dominique-Laurent Couturier, Mark Dunning, Abbi Edwards, Ashley Sawle</h4>
-<h4 class="date">Last modified: 17 Nov 2020</h4>
+<h4 class="date">Last modified: 20 Nov 2020</h4>
 
 </div>
 
@@ -525,7 +525,9 @@ https://yulab-smu.github.io/clusterProfiler-book/chapter2.html#over-representati
 <h2><code>clusterProfiler</code></h2>
 <p><code>clusterprofiler</code> <span class="citation">(Yu et al. 2012)</span> supports direct online access of the current KEGG database, rather than relying on R annotation packages, it also provides some nice visualisation options (KEGG: Kyoto Encyclopedia of Genes and Genomes).</p>
 <pre class="r"><code>library(clusterProfiler)
-search_kegg_organism(&#39;mmu&#39;, by=&#39;kegg_code&#39;)</code></pre>
+library(tidyverse)
+
+search_kegg_organism(&#39;mouse&#39;, by=&#39;common_name&#39;)</code></pre>
 <pre><code>##    kegg_code scientific_name common_name
 ## 14       mmu    Mus musculus       mouse</code></pre>
 </div>
@@ -549,16 +551,16 @@ head(kk, n=10)</code></pre>
 <pre><code>## # A tibble: 10 x 9
 ##    ID     Description  GeneRatio BgRatio  pvalue p.adjust  qvalue geneID   Count
 ##    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
-##  1 mmu01… Fatty acid … 25/1037   62/8910 6.97e-9  2.19e-6 1.69e-6 11363/7…    25
-##  2 mmu00… Steroid bio… 12/1037   20/8910 3.00e-7  4.71e-5 3.63e-5 15490/1…    12
-##  3 mmu03… PPAR signal… 27/1037   89/8910 1.63e-6  1.50e-4 1.16e-4 11363/7…    27
-##  4 mmu01… Biosynthesi… 15/1037   34/8910 1.91e-6  1.50e-4 1.16e-4 30963/1…    15
-##  5 mmu00… Valine, leu… 19/1037   57/8910 1.26e-5  7.93e-4 6.11e-4 227095/…    19
-##  6 mmu04… Calcium sig… 44/1037   200/89… 1.86e-5  9.72e-4 7.49e-4 12767/2…    44
-##  7 mmu00… Glycerolipi… 19/1037   62/8910 4.80e-5  2.16e-3 1.66e-3 68393/5…    19
-##  8 mmu00… Propanoate … 13/1037   34/8910 5.90e-5  2.31e-3 1.78e-3 227095/…    13
-##  9 mmu04… Cytokine-cy… 58/1037   302/89… 6.86e-5  2.39e-3 1.84e-3 16178/1…    58
-## 10 mmu04… PI3K-Akt si… 66/1037   359/89… 8.88e-5  2.61e-3 2.01e-3 12043/2…    66</code></pre>
+##  1 mmu01… Fatty acid … 25/1037   62/8911 6.96e-9  2.19e-6 1.68e-6 11363/7…    25
+##  2 mmu00… Steroid bio… 12/1037   20/8911 2.99e-7  4.72e-5 3.62e-5 15490/1…    12
+##  3 mmu03… PPAR signal… 27/1037   89/8911 1.63e-6  1.50e-4 1.15e-4 11363/7…    27
+##  4 mmu01… Biosynthesi… 15/1037   34/8911 1.91e-6  1.50e-4 1.15e-4 30963/1…    15
+##  5 mmu00… Valine, leu… 19/1037   57/8911 1.26e-5  7.94e-4 6.10e-4 227095/…    19
+##  6 mmu04… Calcium sig… 44/1037   200/89… 1.85e-5  9.72e-4 7.47e-4 12767/2…    44
+##  7 mmu00… Glycerolipi… 19/1037   62/8911 4.80e-5  2.16e-3 1.66e-3 68393/5…    19
+##  8 mmu00… Propanoate … 13/1037   34/8911 5.89e-5  2.32e-3 1.78e-3 227095/…    13
+##  9 mmu04… Cytokine-cy… 58/1037   302/89… 6.83e-5  2.39e-3 1.84e-3 16178/1…    58
+## 10 mmu04… PI3K-Akt si… 66/1037   359/89… 8.85e-5  2.61e-3 2.00e-3 12043/2…    66</code></pre>
 <div id="visualise-a-pathway-in-a-browser" class="section level3">
 <h3>Visualise a pathway in a browser</h3>
 <p><code>clusterProfile</code> has a function <code>browseKegg</code> that allows you to view the KEGG pathway in in your browser with the genes that are in our gene highlighted.</p>
@@ -570,8 +572,8 @@ head(kk, n=10)</code></pre>
 <p>One advantage over the <code>clusterProfiler</code> browser method is that the genes can be coloured according to their fold change levels in our data. To do this we need to pass <code>pathview</code> a named vector of fold change data (actually you could colour by any numeric vector, e.g. p-value).</p>
 <p>The package plots the KEGG pathway to a <code>png</code> file in the working directory.</p>
 <pre class="r"><code>library(pathview)
-logFC &lt;- annotLvV$logFC
-names(logFC) &lt;- annotLvV$Entrez
+logFC &lt;- shrinkLvV$logFC
+names(logFC) &lt;- shrinkLvV$Entrez
 pathview(gene.data = logFC, 
          pathway.id = &quot;mmu03320&quot;, 
          species = &quot;mmu&quot;, 
@@ -593,12 +595,14 @@ pathview(gene.data = logFC,
 <ol style="list-style-type: decimal">
 <li>Run the over-representation analysis for GO terms
 <ul>
-<li>Test terms in the “Molecular Function” ontology</li>
 <li>Use genes that have an adjusted p-value (FDR) of less than 0.01 and an absolute fold change greater than 2.<br />
 </li>
+<li>For this analysis you can use Ensembl IDs rather then Entrez</li>
+<li>You’ll need to provide the background (<code>universe</code>) genes, this should be all the genes in our analysis.</li>
 <li>The mouse database package is called <code>org.Mm.eg.db</code>. You’ll need to load it using <code>library</code> before running the analysis.<br />
 </li>
-<li>For this analysis you can use Ensembl IDs rather then Entrez - you’ll need to set the <code>keyType</code> parameter in the <code>enrichGO</code> command.</li>
+<li>As we are using Ensembl IDs, you’ll need to set the <code>keyType</code> parameter in the <code>enrichGO</code> command to indicate this.</li>
+<li>Only test terms in the “Molecular Function” ontology</li>
 </ul></li>
 <li>Use the <code>dotplot</code> function to visualise the results.</li>
 </ol>
@@ -665,16 +669,16 @@ head(names(Mm.H))</code></pre>
 <pre><code>## # A tibble: 10 x 8
 ##    pathway                  pval     padj log2err     ES   NES  size leadingEdge
 ##    &lt;chr&gt;                   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;list&gt;     
-##  1 HALLMARK_CHOLESTE…   7.27e- 9  1.82e-7   0.761  0.609  2.36    73 &lt;chr [33]&gt; 
+##  1 HALLMARK_CHOLESTE…   1.32e- 8  3.30e-7   0.748  0.609  2.36    73 &lt;chr [33]&gt; 
 ##  2 HALLMARK_OXIDATIV…   1.00e-10  5.00e-9  NA      0.514  2.29   196 &lt;chr [127]&gt;
-##  3 HALLMARK_TGF_BETA…   4.80e- 6  3.15e-5   0.611 -0.591 -2.09    54 &lt;chr [17]&gt; 
-##  4 HALLMARK_ADIPOGEN…   9.61e- 8  1.60e-6   0.705  0.445  1.99   199 &lt;chr [86]&gt; 
-##  5 HALLMARK_FATTY_AC…   2.82e- 6  2.82e-5   0.627  0.438  1.91   155 &lt;chr [56]&gt; 
-##  6 HALLMARK_MTORC1_S…   1.11e- 6  1.39e-5   0.644  0.410  1.84   203 &lt;chr [79]&gt; 
-##  7 HALLMARK_KRAS_SIG…   3.41e- 6  2.84e-5   0.627 -0.415 -1.82   190 &lt;chr [58]&gt; 
-##  8 HALLMARK_ESTROGEN…   5.04e- 6  3.15e-5   0.611 -0.411 -1.81   193 &lt;chr [64]&gt; 
-##  9 HALLMARK_INFLAMMA…   2.48e- 5  1.24e-4   0.576 -0.398 -1.74   188 &lt;chr [56]&gt; 
-## 10 HALLMARK_TNFA_SIG…   2.16e- 5  1.20e-4   0.576 -0.388 -1.71   199 &lt;chr [69]&gt;</code></pre>
+##  3 HALLMARK_TGF_BETA…   7.45e- 6  4.65e-5   0.611 -0.591 -2.09    54 &lt;chr [17]&gt; 
+##  4 HALLMARK_ADIPOGEN…   6.45e- 8  1.08e-6   0.705  0.445  1.99   199 &lt;chr [86]&gt; 
+##  5 HALLMARK_FATTY_AC…   3.80e- 6  3.57e-5   0.627  0.438  1.91   155 &lt;chr [56]&gt; 
+##  6 HALLMARK_MTORC1_S…   1.60e- 6  2.00e-5   0.644  0.410  1.84   203 &lt;chr [79]&gt; 
+##  7 HALLMARK_KRAS_SIG…   5.00e- 6  3.57e-5   0.611 -0.415 -1.82   190 &lt;chr [58]&gt; 
+##  8 HALLMARK_ESTROGEN…   4.62e- 6  3.57e-5   0.611 -0.411 -1.81   193 &lt;chr [64]&gt; 
+##  9 HALLMARK_INFLAMMA…   4.69e- 5  2.58e-4   0.557 -0.398 -1.75   188 &lt;chr [56]&gt; 
+## 10 HALLMARK_TNFA_SIG…   5.16e- 5  2.58e-4   0.557 -0.388 -1.71   199 &lt;chr [69]&gt;</code></pre>
 </div>
 <div id="enrichment-score-plot" class="section level2">
 <h2>Enrichment score plot</h2>

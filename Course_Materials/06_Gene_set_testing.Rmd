@@ -121,7 +121,9 @@ nice visualisation options (KEGG: Kyoto Encyclopedia of Genes and Genomes).
 
 ```{r loadClusterProfiler, message=FALSE}
 library(clusterProfiler)
-search_kegg_organism('mmu', by='kegg_code')
+library(tidyverse)
+
+search_kegg_organism('mouse', by='common_name')
 ```
 
 ## KEGG enrichment analysis
@@ -187,8 +189,8 @@ The package plots the KEGG pathway to a `png` file in the working directory.
 
 ```{r pathview, message=F}
 library(pathview)
-logFC <- annotLvV$logFC
-names(logFC) <- annotLvV$Entrez
+logFC <- shrinkLvV$logFC
+names(logFC) <- shrinkLvV$Entrez
 pathview(gene.data = logFC, 
          pathway.id = "mmu03320", 
          species = "mmu", 
@@ -218,13 +220,16 @@ mmu03320.pathview.png:
 > [clusterProfiler book](http://yulab-smu.top/clusterProfiler-book/chapter5.html#go-over-representation-test).
 > 
 > 1. Run the over-representation analysis for GO terms 
->     - Test terms in the "Molecular Function" ontology 
 >     - Use genes that have an adjusted p-value (FDR) of less than 0.01 and
 > an absolute fold change greater than 2.    
+>     - For this analysis you can use Ensembl IDs rather then Entrez
+>     - You'll need to provide the background (`universe`) genes, this should be
+> all the genes in our analysis.
 >     - The mouse database package is called `org.Mm.eg.db`. You'll need to load
 >  it using `library` before running the analysis.    
->     - For this analysis you can use Ensembl IDs rather then Entrez - you'll
-> need to set the `keyType` parameter in the `enrichGO` command.
+>     - As we are using Ensembl IDs, you'll need to set the `keyType` 
+> parameter in the `enrichGO` command to indicate this.
+>     - Only test terms in the "Molecular Function" ontology 
 > 2. Use the `dotplot` function to visualise the results.
 
 ```{r solution2, eval=F}
