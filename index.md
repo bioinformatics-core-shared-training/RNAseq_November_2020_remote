@@ -116,7 +116,7 @@ Methods](html/A_Introduction_to_RNAseq_Methods.html) - Jon Price
 9:30 - 10:15  [Introduction to RNAseq Analysis in R](html/01_Introduction_to_RNAseq_Analysis_in_R.html) - Jon Price   
 
 10:15 - 12:30 - [RNA-seq Pre-processing](html/02_Preprocessing_Data.html) - 
-Stephane Ballereau
+Stephane Ballereau  
     - [Practical solutions](html/02_Preprocessing_Data.Solutions.html)
 
 12:30 - 13:30 Lunch
