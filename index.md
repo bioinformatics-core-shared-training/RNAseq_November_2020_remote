@@ -142,8 +142,8 @@ RNA-seq](html/04_DE_analysis_with_DESeq2.html) - Abbi Edwards
 12:15 - 13:15 Lunch
 
 13:15 - 15:30 [Annotation and Visualisation of RNA-seq
-results](html/05_Annotation_and_Visualisation.html) - Chandra Chilamakuri  
-<!--    - [practical solutions](html/05_Annotation_and_Visualisation.Solutions.html)  -->
+results](html/05_Annotation_and_Visualisation.html) - Chandra Chilamakuri    
+    - [practical solutions](html/05_Annotation_and_Visualisation.Solutions.html)
 
 15:30 - 17:00 [Gene-set testing](html/06_Gene_set_testing.html) - Ashley Sawle  
     - [slides](html/06_Introduction_to_Functional_Analysis_in_R.html)
