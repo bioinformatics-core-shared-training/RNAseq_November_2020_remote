@@ -136,7 +136,7 @@ Couturier
 
 9:30 - 12:15 - [Differential Expression for
 RNA-seq](html/04_DE_analysis_with_DESeq2.html) - Abbi Edwards 
-    - [practical solutions](html/04_DE_analysis.Solutions.html)
+    - [practical solutions](html/04_DE_analysis.Solutions.html)  
     - [Abbi's live script](live_scripts/Deseq2.R)
 
 12:15 - 13:15 Lunch
