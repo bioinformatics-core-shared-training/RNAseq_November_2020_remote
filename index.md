@@ -147,7 +147,7 @@ results](html/05_Annotation_and_Visualisation.html) - Chandra Chilamakuri
 
 15:30 - 17:00 [Gene-set testing](html/06_Gene_set_testing.html) - Ashley Sawle  
     - [slides](html/06_Introduction_to_Functional_Analysis_in_R.html)
-<!--     - [practical solutions](html/06_Gene_set_testing.Solutions.html)  -->
+    - [practical solutions](html/06_Gene_set_testing.Solutions.html)
 
 <!-- Goodbye: Ash -->
 
