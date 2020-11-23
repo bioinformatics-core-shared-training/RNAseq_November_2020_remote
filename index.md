@@ -47,7 +47,9 @@ as we go.
 
 ## Shared Google Document
 
-This [Google Document](https://docs.google.com/document/d/1zXoe3pyWBDbvPZ0JUZu0TU_HLTgFDtDPtL8Bpk0etFc/edit) contains useful information and links.
+**The shared Google Document was rendered to a pdf at the end of the course and is linked below**
+
+This [Google Document](html/Analysis_of_bulk_RNA-seq_data_Main_Reference_Document.pdf) contains useful information and links.
 
 Please use it to post any questions you have during the course.
 
